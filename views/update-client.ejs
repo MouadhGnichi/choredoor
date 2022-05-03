@@ -1,0 +1,74 @@
+<!-- include Header-->
+<%-include('include/_header')%>
+<!-- /include Header-->
+   <!--Main site-->
+   <main id="site">
+    <div class="container">
+        <div class="box-nav d-flex-justify-between">
+            <div class="filter">
+                <a href="/"> <i class="fas fa-angle--double_left"></i> All clients</a>
+            </div>
+        </div>
+        <div class="form-title  text -center">
+            <h2 class="text-dark">Update Client</h2>
+            <span class="text-light">use the below from to Update on account</span>
+        </div>
+       <!--add client form--> 
+             <!-- form handling-->
+             <form action="/"method="POST" id="update_client">
+                <div class="new_user">
+                    <div class="form-group">
+                        <label for="name" class="text-light">id</label>
+                        <input type="hidden"name="id" value="<% client.id%>">
+                        <input type="text"name="id" value="<% client.name%>"placeholder="bouthayna">
+                     </div>
+                    <div class="new_user">
+                       <div class="form-group">
+                           <label for="name" class="text-light">Email</label>
+                           <input type="hidden"name="Email" value="<% client.email%>">
+                           <input type="text"name="Email" value=""placeholder="bouthayna@gmail.com">
+                        </div>
+                       <div class="new_user">
+                           <div class="form-group">
+                               <label for="name" class="text-light">password</label>
+                               <input type="hidden"name="password" value="<% client.password%>">
+                               <input type="text"name="password" value=""placeholder="ghmakp">
+                           </div>
+                           <div class="new_user">
+                               <div class="form-group">
+                                   <label for="name" class="text-light">nom</label>
+                                   <input type="hidden"name="nom" value="<% client.nom%>">
+                                   <input type="text"name="nom" value=""placeholder="assma">
+                               </div>
+                               <div class="new_user">
+                                   <div class="from-group">
+                                       <label for="pays" class="text-light"></label>
+
+                                       <select name="pays" id="pays-select">
+                                           <option value="Tunisie"></option>
+                                           <option value="paris"></option>
+                                       </select>
+                                       <input type="hidden"name="pays" value="<% client.pays%>">
+                       
+                                       <input type="text"name="pays" value=""placeholder="Tunisie">
+                                   </div>
+                                   <div class="form-group">
+                                       <label for="adresse" class="text-light"></label>
+                                       <input type="hidden"name="adresse" value="adresse">
+                                       <input type="text"name="adresse" value=""placeholder="Tunisiejendouba">
+                                   </div>
+
+
+
+                    
+                </div>
+           
+           </form>
+       
+   </div>   
+</main>
+ <!--/Main site-->
+
+<!-- include footer-->
+<%-include('include/_footer')%>
+<!-- /include footer-->

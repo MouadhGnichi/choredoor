@@ -1,0 +1,23 @@
+<%for(var i=0;i<comptes.length;i++){%>
+    <tr>
+        <td><%=i+1%></td>
+        <td><%=comptes[i].email%></td>
+        <td><%=comptes[i].password%></td>
+        <td><%=comptes[i].nom%></td>
+        <td><%=comptes[i].prenom%></td>
+        <td><%=comptes[i].mobile%></td>
+        <td>
+          
+          <a href="/update_compte?id:<%=comptes[i].id%>"class="btn border-shadow update">
+                <span class="text-gardent"> <i class="fas fa-pencil-square"></i></span>
+             </a>
+          <a class="btn border-shadow delete" data-id=<%=comptes[i]._id%>>
+             <span class="text-gardent"> <i class="fas fa-times-square"></i></span>
+             </a>
+             <a class="btn border-shadow create">
+                <span class="text-gardent"> <i class="fas fa-pencil-alt"></i></span>
+                </a>
+        </td>
+        
+    </tr>
+    <% } %>

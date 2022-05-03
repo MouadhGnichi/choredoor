@@ -1,0 +1,23 @@
+<%for(var i=0;i<clients.length;i++){%>
+<tr>
+    <td><%=i+1%></td>
+    <td><%=clients[i].email%></td>
+    <td><%=clients[i].password%></td>
+    <td><%=clients[i].nom%></td>
+    <td><%=clients[i].pays%></td>
+    <td><%=clients[i].adresse%></td>
+    <td>
+      
+      <a href="/update_client?id:<%=clients[i].id%>"class="btn border-shadow update">
+            <span class="text-gardent"> <i class="fas fa-pencil-square"></i></span>
+         </a>
+      <a class="btn border-shadow delete" data-id=<%=clients[i]._id%>>
+         <span class="text-gardent"> <i class="fas fa-times-square"></i></span>
+         </a>
+         <a class="btn border-shadow create">
+            <span class="text-gardent"> <i class="fas fa-pencil-alt"></i></span>
+            </a>
+    </td>
+    
+</tr>
+<% } %>

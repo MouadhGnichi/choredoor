@@ -1,0 +1,36 @@
+
+<!-- include Header-->
+<%-include('include/_header')%>
+<!-- /include Header-->
+
+   <!--Main site-->
+   <main id="site">
+    <div class="container">
+        <div class="box-nav d-flex-justify-between">
+            <a href="/add-client"class="border-shadow">
+             <span class="text gardient">New device<i class='fa fa-user'></i> </span>
+            </a>
+        </div>
+       
+         <!-- form handling-->
+          <form action="/"method="POST">
+      <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Codedevice</td>
+            </tr>
+            <tbody>
+                <%-include('include/_show')%>
+            </tbody>
+        </thead>
+        </table>
+        </form>
+     </div>
+ </main>
+ <!--/Main site-->
+
+<!-- include footer-->
+<%-include('include/_footer')%>
+<!-- /include footer-->

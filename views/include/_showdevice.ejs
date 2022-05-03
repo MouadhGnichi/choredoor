@@ -1,0 +1,20 @@
+<%for(var i=0;i<devices.length;i++){%>
+    <tr>
+        <td><%=i+1%></td>
+        <td><%=devices[i].name%></td>
+        <td><%=devices[i].codedevice%></td>
+        <td>
+          
+          <a href="/update_device?id:<%=devices[i].id%>"class="btn border-shadow update">
+                <span class="text-gardent"> <i class="fas fa-pencil-square"></i></span>
+             </a>
+          <a class="btn border-shadow delete" data-id=<%=devices[i]._id%>>
+             <span class="text-gardent"> <i class="fas fa-times-square"></i></span>
+             </a>
+             <a class="btn border-shadow create">
+                <span class="text-gardent"> <i class="fas fa-pencil-alt"></i></span>
+                </a>
+        </td>
+        
+    </tr>
+    <% } %>
