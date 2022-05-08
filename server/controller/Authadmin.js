@@ -1,66 +1,60 @@
-const admin = require('../model/model')
+// const admin = require('../model/model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { default: mongoose } = require('mongoose')
-const Admindb = require('../model/model')
-const register = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
-    if (err) {
-      res.json({
-        error: err
-      })
-    }
-  })
-  const admin = new Admindb({
-    _id: new mongoose.Types.ObjectId(),
+const Admindb = require('../model/modeladmin ')
+
+exports.register = async (req, res) => {
+  // const { email, password, status, adresse } = req.body
+  // console.log('password', req.body)
+  const adminExists = await Admindb.findOne(req.body.email)
+  console.log(req.body)
+  if (adminExists) {
+    res.status(400)
+    throw new Error("Admin Already exists")
+  }
+
+  const admin = await Admindb.create({
     email: req.body.email,
     status: req.body.status,
     pays: req.body.pays,
     adresse: req.body.adresse,
     password: bcrypt.hashedPass
-  })()
-  admin.save()
-    .then(admin=> {
-      res.json({
-        message: 'Admin Added Successfully!'
-      })
-    })
-    .catch(error => {
-      res.json({
-        message: 'An error occured!'
-      })
-    })
+  })
 
-const login = (req, res, next) => {
-  const adminid = req.body.adminid
-  const password = req.body.password
-  admin.findOne({ $or: [{ email: adminid}, { adresse: adminid }, { status:adminid }] })
-    .then(admin => {
-      admin
-        ? bcrypt.compare(password, admin.password, function (err, result) {
-            if (err) {
-              res.json({
-                error: err
-              })
-            }
-            if (result) {
-              const token = jwt.sign({ id: admin.id }, 'verySecretValue', { expiresIn: '1h' })
-              res.json({
-                message: 'login successful!',
-                token
-              })
-            } else {
-              res.json({
-                message: 'password does not matched!'
-              })
-            }
-          })
-        : res.json({
-          message: 'No user found!'
-        })
+  if (admin) {
+    res.status(201).json({
+      message: 'Admin Added Successfully!'
     })
+  } else {
+    res.status(400)
+    throw new Error('Invalid credentials')
+  }
 }
-module.exports = {
-  register,
-  login
+
+exports.login = async (req, res, next) => {
+  const { email, password } = req.body
+  const user = await Admindb.findOne({ email })
+  // if (!user) {
+  //   return res.status(400).json({ message: " Utilisateur n'existe pas " })
+  // }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ message: 'Mot de passe incorrecte' })
+  }
+
+  if (user && isMatch) {
+    res.json({
+      _id: user._id,
+      // nom: user.nom,
+      email: user.email,
+      password: user.password
+      // isAdmin: user.isAdmin,
+      // token: generateToken(user._id),
+    })
+  } else {
+    res.status(401).json({ message: 'email ou mot de passe incorrect' })
+  }
 }
+

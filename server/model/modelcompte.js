@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
   },
 
   prenom: String,
-  mobile: Infinity
+  mobile: String
 })
 const Comptedb = mongoose.model('comptedb', schema)
 module.exports = Comptedb

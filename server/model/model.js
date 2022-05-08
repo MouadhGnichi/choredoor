@@ -18,8 +18,17 @@ const schema = new mongoose.Schema({
     type: String
   },
 
-  pays: String,
-  adresse: String
+  pays: {
+    type: String
+  },
+
+  adresse: {
+    type: String
+  }
 })
+
+
+
+
 const Clientdb = mongoose.model('clientdb', schema)
 module.exports = Clientdb

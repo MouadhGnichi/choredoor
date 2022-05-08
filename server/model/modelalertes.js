@@ -18,8 +18,13 @@ const schema = new mongoose.Schema({
     type: String
   },
 
-  pays: String,
-  adresse: String
+  pays: {
+    type: String
+  },
+
+  adresse: {
+    type: String
+  }
 })
 const Alertesdb = mongoose.model('alertesdb ', schema)
 module.exports = Alertesdb

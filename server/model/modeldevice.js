@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     unique: true
   },
   codedevice: {
-    type: Infinity
+    type: String
   }
 })
 const Devicedb = mongoose.model('devicedb', schema)

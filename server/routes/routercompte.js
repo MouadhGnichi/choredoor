@@ -26,4 +26,5 @@ route.post('/api/comptes', controller.create)
 route.get('/api/comptes', controller.find)
 route.put('/api/comptes/:nom', controller.update)
 route.delete('/api/comptes/:nom', controller.delete)
+
 module.exports = route

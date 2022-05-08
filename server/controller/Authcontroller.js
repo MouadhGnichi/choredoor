@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { default: mongoose } = require('mongoose')
 const Clientdb = require('../model/model')
+
 const register = (req, res, next) => {
   bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
     if (err) {
@@ -30,6 +31,7 @@ const register = (req, res, next) => {
         message: 'An error occured!'
       })
     })
+}
 
 const login = (req, res, next) => {
   const clientnom = req.body.clientnom
@@ -38,26 +40,30 @@ const login = (req, res, next) => {
     .then(client => {
       client
         ? bcrypt.compare(password, client.password, function (err, result) {
-            if (err) {
-              res.json({
-                error: err
-              })
-            }
-            if (result) {
-              const token = jwt.sign({ nom: client.nom }, 'verySecretValue', { expiresIn: '1h' })
-              res.json({
-                message: 'login successful!',
-                token
-              })
-            } else {
-              res.json({
-                message: 'password does not matched!'
-              })
-            }
-          })
+          if (err) {
+            res.json({
+              error: err
+            })
+          }
+          if (result) {
+            const token = jwt.sign({ nom: client.nom }, 'verySecretValue', { expiresIn: '1h' })
+            res.json({
+              message: 'login successful!',
+              token
+            })
+          } else {
+            res.json({
+              message: 'password does not matched!'
+            })
+          }
+        })
         : res.json({
           message: 'No user found!'
         })
     })
 }
-module.exports = {register,login}
+
+export {
+  register,
+  login
+}
